@@ -29,6 +29,7 @@ ip_vlan100 = '192.168.10.0 255.255.255.0'
 ip_vlan200 = '192.168.20.0 255.255.255.0'
 ip_vlan300 = '192.168.30.0 255.255.255.0'
 
+#configuracion VTP
 vtp_domain = 'LAB'
 vtp_password = 'hola'
 vtp_version = 2
@@ -72,6 +73,8 @@ PC_vlan300 = f"{gateway_ip} {mask}"
 
 # =================== comandos de configuracion ===================
 
+#todos los comandos utilizados para realizar la red
+#se añadieron variables para aumentar la flexibilidad de la automatizacion
 CONFIGURACIONES = {
     'R1': [
         "interface fastEthernet1/0",
@@ -334,6 +337,7 @@ CONFIGURACIONES = {
         "switchport access vlan 300",
         "spanning-tree portfast"
     ]
+    #no funcionan los VPCs
     #,
     #'PC1':[
     #    f"ip {PC_vlan100} {gateway_vlan100_1}"
@@ -353,7 +357,7 @@ CONFIGURACIONES = {
 
 def generar_conexion(nombre_dispositivo, info):
     return {
-        'device_type': 'cisco_ios_telnet',
+        'device_type': 'cisco_ios_telnet', #se conecta por telnet
         'ip': server,
         'port': info['port'],
         'username': '',
